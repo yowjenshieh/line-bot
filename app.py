@@ -54,15 +54,9 @@ def handle_message(event):
         r = '嗨'
     elif msg == '你吃飯了嗎':
         r = '還沒，有推薦的嗎？'
-
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        line_bot_api.reply_message_with_http_info(
-            ReplyMessageRequest(
-                reply_token=event.reply_token,
-                messages=[TextMessage(text=r)]
-            )
-        )
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(test=r)
 
 if __name__ == "__main__":
     app.run()
