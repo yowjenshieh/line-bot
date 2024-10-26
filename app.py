@@ -16,7 +16,6 @@ from linebot.v3.messaging import (
 from linebot.v3.webhooks import (
     MessageEvent,
     TextMessageContent,
-    StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -49,25 +48,25 @@ def handle_message(event):
     msg = event.message.text
 
     if msg.lower() == 'hi':
-        r = 'Hello'
+        r = TextMessage(text='Hello')
     elif msg == '嗨':
-        r = '嗨'
+        r = TextMessage(text='嗨')
     elif '訂位' in msg:
-        r = '想訂位對嗎？請問日期與人數？'
+        r = TextMessage(text='想訂位對嗎？請問日期與人數？')
     elif '貼圖' in msg:
-        r = StickerSendMessage(
+        r = StickerMessage(
         package_id='789',
         sticker_id='10855'
         )
     else:
-        r = "您的問題機器人無法回應，請稍後由專人為您服務^^"
+        r = TextMessage(text='您的問題機器人無法回應，請稍後由專人為您服務^^')
 
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
         line_bot_api.reply_message_with_http_info(
             ReplyMessageRequest(
                 reply_token=event.reply_token,
-                messages=[TextMessage(text=r)]
+                messages=[r]
             )
         )
 
