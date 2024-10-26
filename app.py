@@ -15,7 +15,8 @@ from linebot.v3.messaging import (
 )
 from linebot.v3.webhooks import (
     MessageEvent,
-    TextMessageContent
+    TextMessageContent,
+    StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -53,6 +54,11 @@ def handle_message(event):
         r = '嗨'
     elif '訂位' in msg:
         r = '想訂位對嗎？請問日期與人數？'
+    elif '貼圖' in msg:
+        r = StickerSendMessage(
+        package_id='789',
+        sticker_id='10855'
+        )
     else:
         r = "您的問題機器人無法回應，請稍後由專人為您服務^^"
 
