@@ -46,7 +46,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     msg = event.message.text
-    r = "您的問題機器人無法回應，請稍後由專人為您服務^^"
 
     if msg.lower() == 'hi':
         r = 'hi'
@@ -54,6 +53,8 @@ def handle_message(event):
         r = '嗨'
     elif msg == '你吃飯了嗎':
         r = '還沒，你有推薦的嗎？'
+    else:
+        r = "您的問題機器人無法回應，請稍後由專人為您服務^^"
 
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
