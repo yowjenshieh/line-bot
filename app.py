@@ -48,11 +48,11 @@ def handle_message(event):
     msg = event.message.text
 
     if msg.lower() == 'hi':
-        r = 'hi'
+        r = 'Hello'
     elif msg == '嗨':
         r = '嗨'
-    elif msg == '你吃飯了嗎':
-        r = '還沒，你有推薦的嗎？'
+    elif '訂位' in msg:
+        r = '想訂位對嗎？請問日期與人數？'
     else:
         r = "您的問題機器人無法回應，請稍後由專人為您服務^^"
 
